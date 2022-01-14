@@ -1,16 +1,20 @@
 const express = require("express");
 const path = require("path");
 require("dotenv").config()
-const io = require("socket.io")(process.env.PORT || 8000);
+
+const PORT = process.env.PORT || 8000
+const app = express();
+const server = require('http').Server(app)
+const io = module.exports.io = require("socket.io")(server);
 
 const users = {};
-const app = express();
+
+
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 app.use(express.static(path.join(__dirname, "build")));
-
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 io.on("connection", (socket) => {
   socket.emit("your id", socket.id);
@@ -30,4 +34,7 @@ io.on("connection", (socket) => {
   });
 });
 
-console.log("Connected...");
+server.listen(PORT, ()=>{
+  console.log("Connected to port : ", PORT);
+})
+

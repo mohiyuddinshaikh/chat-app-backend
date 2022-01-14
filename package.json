@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "react-scripts build"
   },
   "author": "Moin",
   "license": "ISC",
