@@ -6,10 +6,10 @@ const io = require("socket.io")(process.env.PORT || 8000);
 const users = {};
 const app = express();
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 io.on("connection", (socket) => {
